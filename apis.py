@@ -8,12 +8,10 @@ from twilio.rest import Client
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
-print("starting log")
 messages = client.messages.list()
 
 for record in messages:
     print(record.sid)
-print("gather stuff")
 
 #  make sure the acount and token is secure
 # # Download the helper library from https://www.twilio.com/docs/python/install
