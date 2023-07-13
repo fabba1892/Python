@@ -1,7 +1,7 @@
 # Download the helper library from https://www.twilio.com/docs/python/install
 import os
 from twilio.rest import Client
-
+import asyncio
 
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
@@ -10,8 +10,16 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 messages = client.messages.list()
 
-for record in messages:
-    print(record.sid)
+
+async def delete_all_messages():
+    messages = await client.messages.list()
+    for message in messages:
+        print(f"Deleting {message.sid}")
+        # await message.remove()
+
+print("Starting program")
+asyncio.run(delete_all_messages())
+print("Done!")
 
 #  make sure the acount and token is secure
 # # Download the helper library from https://www.twilio.com/docs/python/install
