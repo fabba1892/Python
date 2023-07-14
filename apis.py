@@ -2,9 +2,11 @@
 import os
 from twilio.rest import Client
 import asyncio
+from dotenv import load_dotenv
 
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
+load_dotenv()
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
@@ -12,9 +14,9 @@ messages = client.messages.list()
 
 
 async def delete_all_messages():
-    messages = await client.messages.list()
+    messages =  client.messages.list() #await
     for message in messages:
-        print(f"Deleting {message.sid}")
+        print(f"Would have deleted {message.sid}")
         # await message.remove()
 
 print("Starting program")
