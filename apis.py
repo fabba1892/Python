@@ -16,11 +16,11 @@ messages = client.messages.list()
 async def delete_all_messages():
     messages =  client.messages.list() #await
     for message in messages:
-        print(f"Would have deleted {message.sid}")
-        # await message.remove()
+        print(f"Deleted {message.sid}")
+        await message.delete()
 
 print("Starting program")
-asyncio.run(delete_all_messages())
+asyncio.gather(delete_all_messages())
 print("Done!")
 
 #  make sure the acount and token is secure
